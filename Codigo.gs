@@ -1,6 +1,6 @@
 /**
  * ======================================================================
- * PLANTILLA UNIVERSAL PARA DOCENTES TÉCNICOS - GENERADOR DE EXÁMENES
+ * PLANTILLA UNIVERSAL PARA DOCENTES TÉCNICOS - GENERADOR DE CUESTIONARIOS
  * ======================================================================
  */
 
@@ -8,7 +8,7 @@ function generarMultiplesExamenes() {
   // 1. CONFIGURACIÓN DE GRUPOS
   var listaGrupos = ["2do BC", "2do BD", "1ro BA"]; 
 
-  // 2. CONFIGURACIÓN DEL EXAMEN (Título y cantidad de preguntas por nivel)
+  // 2. CONFIGURACIÓN DEL CUESTIONARIO (Título y cantidad de preguntas por nivel)
   var configuracionExamenes = [{
     titulo: "Evaluación de Programación: JSP y Servlets",
     cantBasicas: 3, cantIntermedias: 2, cantAvanzadas: 1,
