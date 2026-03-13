@@ -43,4 +43,4 @@ Copiá y pegá el siguiente mensaje en Gemini o tu IA preferida para obtener la 
 | **Uso Sugerido** | Evaluaciones y Parciales. | Repasos y Gamificación. |
 
 ---
-**Tip Docente:** Para temas de Robótica o Java con mucho código, se recomienda sacar una captura de pantalla del código o del circuito e insertarla como imagen directamente en la web de Kahoot! una vez subido el Excel.
+**Tip Docente:** Para temas de Programación con mucho código, se recomienda sacar una captura de pantalla del código  e insertarla como imagen directamente en la web de Kahoot! una vez subido el Excel.
