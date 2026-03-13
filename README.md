@@ -1,54 +1,61 @@
 # 🛠️ Fábrica de Cuestionarios Automatizada (Google Apps Script)
 
-Este proyecto permite la generación masiva y automatizada de exámenes autogestionados mediante **Google Forms** y **Google Apps Script**. Está diseñado específicamente para el ámbito técnico y docente (orientado a cursos de UTU y bachilleratos tecnológicos), permitiendo organizar las evaluaciones por niveles de dificultad: **Básico, Intermedio y Avanzado**.
+Este proyecto permite la generación masiva y automática de evaluaciones autogestionadas mediante **Google Forms** y **Google Apps Script**. Está diseñado para el ámbito docente, permitiendo organizar los cuestionarios por niveles de dificultad: **Básico, Intermedio y Avanzado**.
 
 ## 🚀 Características Principales
 
-* **Generación Dinámica:** Crea formularios de Google automáticamente a partir de un banco de preguntas en JavaScript.
-* **Organización por Niveles:** Permite configurar cuántas preguntas de cada nivel (Básico, Intermedio, Avanzado) debe incluir el examen.
-* **Aleatoriedad:** Mezcla las preguntas de cada banco para que cada examen generado sea diferente.
-* **Gestión de Archivos:** Crea automáticamente una carpeta en Google Drive (ej. "Exámenes - Marzo 2026") y mueve los formularios allí para mantener el orden.
+* **Generación Dinámica:** Crea formularios de Google automáticamente desde un bloque de código.
+* **Organización por Niveles:** Permite configurar cuántas preguntas de cada nivel debe incluir el cuestionario final.
+* **Aleatoriedad:** Mezcla las preguntas de cada nivel para que cada formulario generado sea único.
+* **Gestión de Archivos:** Crea automáticamente una carpeta en Google Drive (ej. "Exámenes - Marzo 2026") para organizar los archivos por mes y año.
 * **Identificación Obligatoria:** Incluye campos de Nombre, Apellido y selección de Grupo de forma predeterminada.
 
 ## 📋 Instrucciones de Configuración
 
-Seguí estos pasos para poner en marcha tu propia fábrica de exámenes:
-
 1.  **Crear el Proyecto:**
     * Andá a [Google Drive](https://drive.google.com/).
     * Seleccioná **Nuevo > Más > Google Apps Script**.
-    * Dale un nombre al proyecto (ej. "Generador de Exámenes de Programación").
+    * Nombrá el proyecto (ej. "Generador de Cuestionarios").
 
-2.  **Pegar el Script Maestro:**
-    * Copiá el código del archivo `Codigo.gs` (o el script maestro que tenés) y reemplazá todo el contenido en el editor de Apps Script.
+2.  **Cargar el Script:**
+    * Copiá el contenido del archivo `Codigo.gs` de este repositorio y reemplazá todo el código en el editor de Google.
 
-3.  **Configurar Bancos de Preguntas:**
-    * Localizá las variables `bancoBasico`, `bancoIntermedio` y `bancoAvanzado`.
-    * Utilizá la función `crearPregunta(tipo, titulo, opciones, correcta)` para añadir tus ítems.
-    * **Ejemplo:**
-        ```javascript
-        crearPregunta('MULTIPLE', '¿Qué significa MVC?', ['Modelo Vista Controlador', 'Mi Vida Corta'], 0)
-        ```
+3.  **Ejecutar:**
+    * En la barra superior del editor, seleccioná la función `generarMultiplesCuestionarios`.
+    * Hacé clic en **Ejecutar** y otorgá los permisos necesarios a tu cuenta de Google.
 
-4.  **Ejecutar:**
-    * En la barra de herramientas superior, seleccioná la función `generarMultiplesExamenes`.
-    * Hacé clic en **Ejecutar**. (La primera vez te pedirá permisos para acceder a Google Drive y Google Forms).
+## 🤖 Cómo usar la IA para crear nuevas preguntas
 
-## 🛠️ Tipos de Preguntas Soportados
+Si no querés escribir las preguntas manualmente, podés pedirle a una inteligencia artificial (como Gemini) que las redacte por vos. Solo tenés que copiar el siguiente mensaje y completarlo con tu tema:
 
-| Tipo | Descripción | Formato de Respuesta Correcta |
-| :--- | :--- | :--- |
-| `MULTIPLE` | Opción múltiple (una sola correcta). | Índice numérico (ej. `0`) |
-| `CHECKBOX` | Casillas de verificación (varias correctas). | Array de índices (ej. `[0, 2]`) |
-| `DROPDOWN` | Lista desplegable. | Índice numérico (ej. `1`) |
-| `TEXT` | Pregunta abierta/párrafo. | `null` (evaluación manual) |
+> **Mensaje para la IA:**
+> "Actuá como un experto en **[Escribí aquí tu materia o tema]**. Necesito que crees un conjunto de preguntas para un cuestionario automatizado.
+> 
+> Por favor, generá tres **listas de datos** denominadas `bancoBasico`, `bancoIntermedio` y `bancoAvanzado` que sigan estrictamente este formato:
+> `crearPregunta('TIPO', 'Pregunta', ['Opción 0', 'Opción 1', 'Opción 2'], POSICIÓN_CORRECTA)`
+> 
+> **Reglas importantes:**
+> 1. **Tipos de pregunta:** Usá 'MULTIPLE' (una sola opción correcta), 'CHECKBOX' (varias opciones correctas; en este caso indicá las posiciones así: `[0, 2]`) o 'TEXT' (para preguntas abiertas; en este caso usá `[], null` al final).
+> 2. **Cantidad:** Generá al menos 6 preguntas para cada nivel de dificultad.
+> 3. **Idioma:** Español.
+> 4. **Numeración:** Es fundamental que la primera opción sea siempre la **número 0**, la segunda la **número 1**, y así sucesivamente."
 
-## 💡 Consejos para la Labor Docente
+### Cómo integrar las respuestas en tu proyecto
+Una vez que la IA te entregue el texto:
+1.  **Copiá el código generado.**
+2.  **Pegalo en el Script:** Buscá la zona que dice `BANCOS DE PREGUNTAS` en tu archivo `Codigo.gs` y pegá lo que copiaste, sustituyendo los ejemplos anteriores.
+3.  **Ejecutá:** Dale nuevamente al botón **Ejecutar**.
 
-* **Uso de la IA:** Podés usar modelos de lenguaje (como Gemini) para generar rápidamente nuevos bancos de preguntas específicos sobre Java, Robótica o SQL, pidiéndole que respete el formato `crearPregunta()`.
-* **Revisión Manual:** Si utilizás la opción "Otra" en las preguntas múltiples o preguntas de tipo `TEXT`, recordá que Google Forms no las calificará automáticamente; deberás revisarlas en la pestaña de respuestas.
-* **Escalabilidad:** Podés modificar el array `listaGrupos` para adaptar el examen a los diferentes cursos que tengas a cargo en el año lectivo.
+## 💡 Conceptos Clave para el Usuario
+
+### ¿Por qué la numeración de respuestas empieza en 0?
+Para que el programa identifique la respuesta correcta, no utiliza letras (A, B, C) sino la posición física en la fila de opciones:
+* Si la respuesta correcta es la **primera**, el número es **0**.
+* Si la respuesta correcta es la **segunda**, el número es **1**.
+
+### Evaluación de respuestas abiertas
+Si utilizás el tipo `TEXT` o la opción "Otra" en preguntas múltiples, recordá que Google Forms no las calificará automáticamente. Deberás ingresar a la pestaña de "Respuestas" del formulario para asignar el puntaje manualmente a esos alumnos.
 
 ---
-**Autor:** [Tu Nombre/GitHub]
-**Contexto:** Herramienta de apoyo para la labor docente en UTU - Uruguay.
+**Autor:** [Elizabeth/GitHub]
+**Contexto:** Herramienta de apoyo docente para la enseñanza.
